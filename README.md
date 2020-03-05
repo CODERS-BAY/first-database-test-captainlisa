@@ -82,15 +82,15 @@ Wie löst man eine M:N Beziehung auf? Erstelle ein Beispiel
 ## Aufgabe 15
 Ein Handelsbetrieb verkauft ein Sortiment von Artikeln, die er von verschiedenen Herstellern bezieht. Der Handelsbetrieb hat einen bestimmten Kundenkreis, der regelmäßig Bestellungen aufgibt. Eine Bestellung kann mehrere Artikel umfassen. Ein Artikel kann von mehreren Lieferanten bezogen werden und ein Lieferant liefert natürlich meist mehr als einen Artikel. Erstelle ein ERD und ein Relationenmodell, welches der 3. Normalform entspricht.
 - Relationenmodell: 
-  - Hersteller (**Hersteller-Nr:int**, *adress-nr:varchar(32)*, name:varchar(32))
-  - Artikel (**Artikel-Nr:int**, *Hersteller-Nr:int*, bezeichnung:varchar(32), anzahl:int)
-  - Kunde (**Kundennummer:int**, *address-nr:varchar(32)*, name:varchar(32))
-  - Bestell-liste (***Kundennummer:int***, ***Bestell-Nr:int***)
-  - Lieferant (**Lieferanten-Nr:int**, name:varchar(32), firma:varchar(32))
-  - Bestellung (**Bestell-Nr:int**, *Artikel-Nr:int*, summe:double, datum:date)
-  - Lieferliste (**Liefer-Nr:int**, *Lieferanten-Nr:int*, *Artikel-Nr:int*)
-  - Adressenliste (**Address-nr:int**, *PLZ:int*, Straße:varchar(32), Hausnummer:int, tuer:int, zusatz:varchar(32))
-  - Ort (**PLZ:int**, **name:varchar(32)**)
+  - Manufacturer (**Manufacturer-Nr:int**, *adress-nr:varchar(32)*, name:varchar(32))
+  - Article (**ATricle-Nr:int**, *Manufacturer-Nr:int*, name:varchar(32), pieces:int)
+  - Customer (**CustomerNr:int**, *address-nr:varchar(32)*, name:varchar(32))
+  - Oder List (***CustomerNr:int***, ***Order-Nr:int***)
+  - Supplier (**Supplier-Nr:int**, name:varchar(32), company:varchar(32))
+  - Order (**Order-Nr:int**, *Atricle-Nr:int*, sum:double, date:date)
+  - Delivery List (**Delivery-Nr:int**, *Supplier-Nr:int*, *Atricle-Nr:int*)
+  - Adressliste (**Address-nr:int**, *PLZ:int*, street:varchar(32), house_number:int, door:int, addition:varchar(32))
+  - Place (**PLZ:int**, **name:varchar(32)**)
 - ERM:
   - ![Handelsbetrieb](handelsbetrieb.jpeg)
   
@@ -112,13 +112,13 @@ Bei einem Flug-Einsatz wird ein Flug (z.B. „LH 306“) an einem bestimmten Dat
 Bilden Sie das konzeptuelle Schema in ein relationales Schema ab. Das relationale Schema soll der 3. Normalform genügen
 
 - Relationenmodell:
-  - Flughafen (**Flughafen-ID:char**, stadt:char, addresse:varchar(32))
-  - Flug (**Flug-Nr:varchar(32)**, start_flughafen:char, ziel_flughafen:char, abflug:time, ankunft:time)
-  - Flugzeugtyp (**Typ-nr:int**, name:varchar(32), sitze:int)
-  - Pilot (**Pilot-ID:int**, name:varchar(32), geburtsdatum:date)
-  - Berechtigungsliste (***Typ-Nr:int***, ***Pilot-ID:int***)
-  - Flugzeug (***Typ-nr:int***, **name:varchar(32)**, in_betrieb_seit:date, naechste_wartung:date)
-  - Flugplan (***Flug-Nr:varchar(32)***, ***Pilot-ID:int***, ***Flugzeug-ID:varchar(32)***, datum:date)
+  - airport (**airport-ID:char**, city:char, address:varchar(32))
+  - flight (**flight-Nr:varchar(32)**, start:char, destination:char, departure:time, arrival:time)
+  - aircrafttype (**type-nr:int**, name:varchar(32), seats:int)
+  - pilot (**Pilot-ID:int**, name:varchar(32), date_pf_birth:date)
+  - authorization list (***type-Nr:int***, ***Pilot-ID:int***)
+  - airplane (***type-nr:int***, **name:varchar(32)**, in_operation_sincewa:date, next_maintenance:date)
+  - flight plan (***flight-Nr:varchar(32)***, ***Pilot-ID:int***, ***airplane-ID:varchar(32)***, date:date)
 
 - ERM
   
