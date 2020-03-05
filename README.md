@@ -3,7 +3,7 @@
 Stelle Entitäten mittels Chen-Notation und Min,Max Notation dar.
 Wähle ein sinnvolles Beispiel!
 
-![Chen-Notation](chen-notation.jpeg)
+![Chen-Notation](chennotation.jpeg)
 
 ## Aufgabe 2
 Kann eine Beziehung Attribute haben?
@@ -47,7 +47,8 @@ Welche Arten von Beziehungen gibt es? Zeichne für jede ein Beispiel auf
 - unär: Eine Entität hat eine Beziehung mit sich selbst
 - binär: Beziehung zwischen zwei Entitäten
 - ternär: Beziehung zwischen drei oder mehr Entitäten
-- ![Beziehungen](beziehungen.jpeg)
+
+![Beziehungen](relationships.jpeg)
   
 ## Aufgabe 9
 Was bedeutet der Begriff Kardinalität und welche Kardinalitäten gibt es?
@@ -83,16 +84,16 @@ Wie löst man eine M:N Beziehung auf? Erstelle ein Beispiel
 Ein Handelsbetrieb verkauft ein Sortiment von Artikeln, die er von verschiedenen Herstellern bezieht. Der Handelsbetrieb hat einen bestimmten Kundenkreis, der regelmäßig Bestellungen aufgibt. Eine Bestellung kann mehrere Artikel umfassen. Ein Artikel kann von mehreren Lieferanten bezogen werden und ein Lieferant liefert natürlich meist mehr als einen Artikel. Erstelle ein ERD und ein Relationenmodell, welches der 3. Normalform entspricht.
 - Relationenmodell: 
   - Manufacturer (**Manufacturer-Nr:int**, *adress-nr:varchar(32)*, name:varchar(32))
-  - Article (**ATricle-Nr:int**, *Manufacturer-Nr:int*, name:varchar(32), pieces:int)
+  - Article (**Article-Nr:int**, *Manufacturer-Nr:int*, name:varchar(32), pieces:int)
   - Customer (**CustomerNr:int**, *address-nr:varchar(32)*, name:varchar(32))
-  - Oder List (***CustomerNr:int***, ***Order-Nr:int***)
+  - Order List (***CustomerNr:int***, ***Order-Nr:int***)
   - Supplier (**Supplier-Nr:int**, name:varchar(32), company:varchar(32))
   - Order (**Order-Nr:int**, *Atricle-Nr:int*, sum:double, date:date)
-  - Delivery List (**Delivery-Nr:int**, *Supplier-Nr:int*, *Atricle-Nr:int*)
+  - Delivery List (**Delivery-Nr:int**, *Supplier-Nr:int*, *Article-Nr:int*)
   - Adressliste (**Address-nr:int**, *PLZ:int*, street:varchar(32), house_number:int, door:int, addition:varchar(32))
   - Place (**PLZ:int**, **name:varchar(32)**)
 - ERM:
-  - ![Handelsbetrieb](handelsbetrieb.jpeg)
+  - ![trading company](tradingcompany.jpeg)
   
 ## Aufgabe 16
 Welche Anomalien kennst du und was beschreiben sie?
@@ -115,13 +116,13 @@ Bilden Sie das konzeptuelle Schema in ein relationales Schema ab. Das relational
   - airport (**airport-ID:char**, city:char, address:varchar(32))
   - flight (**flight-Nr:varchar(32)**, start:char, destination:char, departure:time, arrival:time)
   - aircrafttype (**type-nr:int**, name:varchar(32), seats:int)
-  - pilot (**Pilot-ID:int**, name:varchar(32), date_pf_birth:date)
+  - pilot (**Pilot-ID:int**, firstname:varchar(32), lastname:varchar(32), date_of_birth:date)
   - authorization list (***type-Nr:int***, ***Pilot-ID:int***)
   - airplane (***type-nr:int***, **name:varchar(32)**, in_operation_sincewa:date, next_maintenance:date)
   - flight plan (***flight-Nr:varchar(32)***, ***Pilot-ID:int***, ***airplane-ID:varchar(32)***, date:date)
 
 - ERM
   
-   ![ERM](erm-flughafen.jpeg)
+   ![ERM](airway.jpeg)
 
 
