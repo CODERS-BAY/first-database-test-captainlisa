@@ -82,18 +82,21 @@ Wie löst man eine M:N Beziehung auf? Erstelle ein Beispiel
   
 ## Aufgabe 15
 Ein Handelsbetrieb verkauft ein Sortiment von Artikeln, die er von verschiedenen Herstellern bezieht. Der Handelsbetrieb hat einen bestimmten Kundenkreis, der regelmäßig Bestellungen aufgibt. Eine Bestellung kann mehrere Artikel umfassen. Ein Artikel kann von mehreren Lieferanten bezogen werden und ein Lieferant liefert natürlich meist mehr als einen Artikel. Erstelle ein ERD und ein Relationenmodell, welches der 3. Normalform entspricht.
-- Relationenmodell: 
-  - Manufacturer (**Manufacturer-Nr:int**, *adress-nr:varchar(32)*, name:varchar(32))
-  - Article (**Article-Nr:int**, *Manufacturer-Nr:int*, name:varchar(32), pieces:int)
-  - Customer (**CustomerNr:int**, *address-nr:varchar(32)*, name:varchar(32))
-  - Order List (***CustomerNr:int***, ***Order-Nr:int***)
-  - Supplier (**Supplier-Nr:int**, name:varchar(32), company:varchar(32))
-  - Order (**Order-Nr:int**, *Atricle-Nr:int*, sum:double, date:date)
-  - Delivery List (**Delivery-Nr:int**, *Supplier-Nr:int*, *Article-Nr:int*)
-  - Adressliste (**Address-nr:int**, *PLZ:int*, street:varchar(32), house_number:int, door:int, addition:varchar(32))
-  - Place (**PLZ:int**, **name:varchar(32)**)
+- Relationenmodell (updated!):
+  - Manufacturer (**manufacturer_id:int**, *adress_id:int*, company_name:varchar(32))
+  - Article (**article_nr:int**, *manufacturer_id:int*, *orderlist_id:int*, *delivery_id:int*, designation:varchar(32), stock:int)
+  - Customer (**customer_id:int**, *address_id:int*, first_name:varchar(20), last_name:varchar(20), birthday:date, email:varchar(30))
+  - Order List (**orderlist_id:int**, order_nr:int, article_nr:int, pieces:int)
+  - Supplier (**supplier_id:int**, *delivery_id:int*, first_name:varchar(20), last_name:varchar(20), company:varchar(32))
+  - Order (**order_nr:int**, *customer_id:int*, *orderlist_id:int*, sum:double, date_of_invoice:date)
+  - Delivery List (**delivery_id:int**, *supplier_id:int*, *article_nr:int*, delivery_date:date)
+  - Adressliste (**address_id:int**, zip:varchar(5), city:varchar(20), street:varchar(32), house_number:int, door:int, addition:varchar(32))
+  
 - ERM:
   - ![trading company](tradingcompany.jpeg)
+
+- Version 2:
+  - ![trading company](trading_company.jpeg)
   
 ## Aufgabe 16
 Welche Anomalien kennst du und was beschreiben sie?
@@ -112,17 +115,22 @@ Jedes einzelne Flugzeug ist von einem bestimmten Flugzeugtyp (z.B. „747-400“
 Bei einem Flug-Einsatz wird ein Flug (z.B. „LH 306“) an einem bestimmten Datum (z.B. „6.2.2011“) von einem bestimmten Piloten (z.B. „Meier“) mit einem bestimmten Flugzeug (z.B. „Mozart“) geflogen.
 Bilden Sie das konzeptuelle Schema in ein relationales Schema ab. Das relationale Schema soll der 3. Normalform genügen
 
-- Relationenmodell:
-  - airport (**airport-ID:char**, city:char, address:varchar(32))
-  - flight (**flight-Nr:varchar(32)**, start:char, destination:char, departure:time, arrival:time)
-  - aircrafttype (**type-nr:int**, name:varchar(32), seats:int)
-  - pilot (**Pilot-ID:int**, firstname:varchar(32), lastname:varchar(32), date_of_birth:date)
-  - authorization list (***type-Nr:int***, ***Pilot-ID:int***)
-  - airplane (***type-nr:int***, **name:varchar(32)**, in_operation_sincewa:date, next_maintenance:date)
-  - flight plan (***flight-Nr:varchar(32)***, ***Pilot-ID:int***, ***airplane-ID:varchar(32)***, date:date)
+- Relationenmodell (updated!):
+  - airport (**airport_id:char(3)**, airport_name:varchar(20), country:varchar(20))
+  - flight (**flight_nr:varchar(7)**, *departure_airport:char(3)*, *destination_airport:char(3)*, *plan_id:int*, departure_time:time, arrival_time:time, flight_date:date)
+  - aircraft type (**type_id:varchar(10)**, *authorization_id:int*, designation:varchar(20), max_capacity:int, range:double)
+  - pilot (**pilot_id:int**, *authorization_id:int*, *plan_id:int*, first_name:varchar(20), last_name:varchar(20), birthday:date, licence:varchar(10), company:varchar(20))
+  - authorization list (**authorization_id:int**, pilot_id:int, type_id:varchar(10))
+  - aircraft (**aircraft_id:int**, *plan_id:int*, *type_id:varchar(10)*, designation:varchar(20), next_maintenance:date, date_of_entry:date)
+  - flight plan (**plan_id:int**, flight_nr:varchar(7), pilot_id:int, aircraft_id:int, flight_date:date)
+
 
 - ERM
   
    ![ERM](airway.jpeg)
+
+- version 2
+
+   ![airline](airline_erm.jpeg)
 
 
